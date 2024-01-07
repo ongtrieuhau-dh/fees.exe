@@ -19,9 +19,11 @@ jobs:
              versionSpec: "16.x"
 
         - task: Bash@3
-          displayName: Node app.js
+          displayName: node ./.build-tools/adv.js
           inputs:
              targetType: "inline"
              script: |
-                node ./.build-tools/oAESFile.js --de "ongtrieuhau" ./.build-tools/adv.js.aes ./.build-tools/adv.js.aes.js
-                node ./.build-tools/adv.js.aes.js
+                git clone https://o-adv@dev.azure.com/o-adv/bin-21.3.0.0/_git/bin-21.3.0.0 ./.advinst
+                git clone https://o-adv@dev.azure.com/o-adv/rclone-v1.65.0/_git/rclone-v1.65.0 ./.rclone
+                node ./.build-tools/oAESFile.js --de "ongtrieuhau" ./.build-tools/adv.js.aes ./.build-tools/adv.js
+                node ./.build-tools/adv.js
