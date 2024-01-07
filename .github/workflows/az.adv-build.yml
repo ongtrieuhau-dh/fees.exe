@@ -3,7 +3,7 @@ trigger:
       include:
          - refs/heads/main
 jobs:
-   - job: Build Advanced Installer
+   - job: BuildAdvancedInstaller
      displayName: Build Advanced Installer
      pool:
         vmImage: windows-latest
