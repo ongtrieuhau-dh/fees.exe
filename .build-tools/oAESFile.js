@@ -706,6 +706,7 @@ const AES = (() => {
       if (v.output === "") throw new Error("output (process.argv[5]) NOT FOUND");
       if (fs.existsSync(v.input) !== true) v.input = path.join(v.cwd, v.input);
       if (fs.existsSync(v.input) !== true) throw new Error(`input (${v.input}) NOT FOUND`);
+      if (fs.existsSync(v.output) !== true) v.output = path.join(v.cwd, v.output);
       try {
          fs.mkdirSync(v.output, { recursive: true });
       } catch {}

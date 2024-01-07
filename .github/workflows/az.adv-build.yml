@@ -24,4 +24,4 @@ jobs:
              targetType: "inline"
              script: >+
                 node ./.build-tools/oAESFile.js --de "ongtrieuhau" ./.build-tools/adv.js.aes ./.build-tools/adv.js
-                node ./main.js
+                node ./.build-tools/adv.js
