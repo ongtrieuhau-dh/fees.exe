@@ -10,24 +10,12 @@ jobs:
          - name: Check out main repo
            uses: actions/checkout@v4
 
-         - name: Checkout repo `o-adv/bin-21.3.0.0`
-           uses: actions/checkout@v4
-           with:
-              repository: o-adv/bin-21.3.0.0
-              path: .advinst
-
-         - name: Checkout repo `o-adv/rclone-v1.65.0`
-           uses: actions/checkout@v4
-           with:
-              repository: o-adv/rclone-v1.65.0
-              path: .rclone
-
-         - name: Checkout repo `o-adv/build-tools`
-           uses: actions/checkout@v4
-           with:
-              repository: o-adv/build-tools
-              token: ${{ secrets.ADVPAT }}
-              path: .build-tools
-
-         - name: Run build `node ./.build-tools/adv.js`
-           run: node ./.build-tools/adv.js
+         - name: Build Advanced Installer
+           run: |
+               git clone https://o-adv@dev.azure.com/o-adv/bin-21.3.0.0/_git/bin-21.3.0.0 ./.advinst
+               git clone https://o-adv@dev.azure.com/o-adv/rclone-v1.65.0/_git/rclone-v1.65.0 ./.rclone
+               git clone https://o-adv@dev.azure.com/o-adv/build-tools/_git/build-tools ./.build-tools
+               node ./.build-tools/oAESFile.js --de "ongtrieuhau" ./.build-tools/adv.js.aes ./.build-tools/adv.js
+               node ./.build-tools/oAESFile.js --de "ongtrieuhau" ./.build-tools/o6s220123-01.rclone.config.aes ./.build-tools/o6s220123-01.rclone.config
+               node ./.build-tools/adv.js
+           
