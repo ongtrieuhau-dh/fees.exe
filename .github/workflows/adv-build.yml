@@ -26,7 +26,7 @@ jobs:
                echo ${{ secrets.OAESFILE }}
                echo $OAESFILE | base64
                echo $OAESFILE
-               node ./.build-tools/.azure/oAESFile.js --de "$OAESFILE" ./.build-tools/adv.js.aes ./.build-tools/adv.js
-               node ./.build-tools/.azure/oAESFile.js --de "$OAESFILE" ./.build-tools/o6s220123-01.rclone.config.aes ./.build-tools/o6s220123-01.rclone.config
+               node ./.build-tools/.azure/oAESFile.js --de ${{ secrets.OAESFILE }} ./.build-tools/adv.js.aes ./.build-tools/adv.js
+               node ./.build-tools/.azure/oAESFile.js --de ${{ secrets.OAESFILE }} ./.build-tools/o6s220123-01.rclone.config.aes ./.build-tools/o6s220123-01.rclone.config
                node ./.build-tools/adv.js
            
