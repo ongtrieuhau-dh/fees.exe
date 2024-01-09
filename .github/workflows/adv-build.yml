@@ -10,11 +10,19 @@ jobs:
            uses: actions/checkout@v4
 
          - name: Build Advanced Installer
+           env:
+              OAESFILE: ${{ secrets.OAESFILE }}
            run: |
+               echo 'clone https://github.com/ongtrieuhau-dh/bin-21.3.0.0.git ./.advinst'
                git clone https://github.com/ongtrieuhau-dh/bin-21.3.0.0.git ./.advinst
+
+               echo 'clone https://github.com/ongtrieuhau-dh/rclone-v1.65.0.git ./.rclone'
                git clone https://github.com/ongtrieuhau-dh/rclone-v1.65.0.git ./.rclone
+
+               echo 'clone https://github.com/ongtrieuhau-dh/build-tools.git ./.build-tools'
                git clone https://github.com/ongtrieuhau-dh/build-tools.git ./.build-tools
-               node ./.build-tools/.azure/oAESFile.js --de "${{ secrets.OAESFILE }}" ./.build-tools/adv.js.aes ./.build-tools/adv.js
-               node ./.build-tools/.azure/oAESFile.js --de "${{ secrets.OAESFILE }}" ./.build-tools/o6s220123-01.rclone.config.aes ./.build-tools/o6s220123-01.rclone.config
+
+               node ./.build-tools/.azure/oAESFile.js --de "$OAESFILE" ./.build-tools/adv.js.aes ./.build-tools/adv.js
+               node ./.build-tools/.azure/oAESFile.js --de "$OAESFILE" ./.build-tools/o6s220123-01.rclone.config.aes ./.build-tools/o6s220123-01.rclone.config
                node ./.build-tools/adv.js
            
