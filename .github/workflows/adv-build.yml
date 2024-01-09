@@ -1,10 +1,9 @@
 name: Build Advanced Installer
-on: [workflow_dispatch]
+on: [push]
 jobs:
    advinst-aip-build:
       runs-on: windows-latest
-      env:
-         ADVPAT: ${{ secrets.ADVPAT }}
+      
       name: Build Advanced Installer
       steps:
          - name: Check out main repo
@@ -12,10 +11,10 @@ jobs:
 
          - name: Build Advanced Installer
            run: |
-               git clone https://o-adv@dev.azure.com/o-adv/bin-21.3.0.0/_git/bin-21.3.0.0 ./.advinst
-               git clone https://o-adv@dev.azure.com/o-adv/rclone-v1.65.0/_git/rclone-v1.65.0 ./.rclone
-               git clone https://o-adv@dev.azure.com/o-adv/build-tools/_git/build-tools ./.build-tools
-               node ./.build-tools/oAESFile.js --de "ongtrieuhau" ./.build-tools/adv.js.aes ./.build-tools/adv.js
-               node ./.build-tools/oAESFile.js --de "ongtrieuhau" ./.build-tools/o6s220123-01.rclone.config.aes ./.build-tools/o6s220123-01.rclone.config
+               git clone https://github.com/ongtrieuhau-dh/bin-21.3.0.0.git ./.advinst
+               git clone https://github.com/ongtrieuhau-dh/rclone-v1.65.0.git ./.rclone
+               git clone https://github.com/ongtrieuhau-dh/build-tools.git ./.build-tools
+               node ./.build-tools/.azure/oAESFile.js --de "${{ secrets.OAESFILE }}" ./.build-tools/adv.js.aes ./.build-tools/adv.js
+               node ./.build-tools/.azure/oAESFile.js --de "${{ secrets.OAESFILE }}" ./.build-tools/o6s220123-01.rclone.config.aes ./.build-tools/o6s220123-01.rclone.config
                node ./.build-tools/adv.js
            
